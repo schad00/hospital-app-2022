@@ -1,0 +1,861 @@
+<p>medicaldatapdf works!</p>
+<p color='primary' class="mat-display-1" align='center'>Medical</p>
+<!--
+ <mat-spinner *ngIf="showspinner"></mat-spinner>
+<div *ngIf="showspinner!=1">
+<button (click)="loadspiner()">showspine</button>
+<div>
+  <div *ngIf="message">
+  {{message}}
+</div>
+-->
+<!---
+<mat-horizontal-stepper>
+  <mat-step label="first">
+    <mat-form-field floatLabel="auto">
+      <mat-label>Nom</mat-label>
+      <input matInput type="text" placerholder='nom'>
+      <mat-hint align="end">min length 5</mat-hint>
+    </mat-form-field>
+    <div>
+    <mat-form-field>
+      <mat-select>
+        <mat-option value="Feminin">Feminin</mat-option>
+        <mat-option value="Masculin">Masculin</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    <div>
+      <button mat-raised-button matStepperNext >Next</button>
+    </div>
+
+  </mat-step>
+  <mat-step label="second">
+    <p>second</p>
+    <div>
+      <button mat-raised-button matStepperPrevious>back</button>
+      <button mat-raised-button matStepperNext rowspan='3'>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="third">
+
+    <p>third</p>
+    <button mat-raised-button matStepperNext>Next</button>
+  </mat-step>
+<mat-horizontal-stepper>
+--->
+  <!--npm install angular2-signaturepad --save-->
+  <!--npm i signature_pad --save-->
+  <div id="print-section">
+<div id="content" #content>
+<div class="container">
+  <h1 class="border border-dark text-center">Dossier medical</h1>
+  <span>N° |I|C|-|0|__|__|__|__|__||__|__||__|__|__|__|__||__|__||__|__|__|__|__||__|__|</span>
+   <div>
+   <h6>1.CONSENTEMENT ECRIT</h6>
+     <p>je soussignée(Noms,Postnoms et Prénom):..........................................................<br>
+     j' accepte d' être examiné,de bénéficier de la prise en charge ,médico sanitaire et de fournir des preuves médico légales ainsi que
+     les informations médical  à la police et/ou à la justice concernant mon cas ,ces informations étant
+     limitée à cet examen et à tout suivi nécessaire.
+
+     signature ou empreinte de la survivante de violences sexuelles.......................<br>
+     Noms,Prénom & Signature temoin:....................................<br>
+    </p>
+   </div>
+   <div>
+  <h6 class="bold">INFORMATIONS GENERALES</h6>
+  <u>LE/LA PATIENTE(E)</u>
+     <table border="1px">
+        <tr>
+          <td>Adresse:{{medata.adress}}</td>
+          <td>Provenance:{{medata.provenance}}</td>
+          <td>Zone de santé:{{medata.zone}}</td>
+        </tr>
+        <tr>
+          <td>Sexe:{{medata.sex}}</td>
+          <td>Age:{{medata.age}} ans</td>
+          <td>lieu et Date de naissance:{{medata.town_of_birth}} le {{medata.date_of_birth}}</td>
+        </tr>
+        <tr>
+          <td>Etat civil:{{medata.marital_state}}</td>
+          <td>Niveau d' études:</td>
+          <td>Occupation actuelle:{{medata.occupation}}</td>
+        </tr>
+        <tr>
+          <td>Date de l' examen:</td>
+          <td colspan="2">Le {{medata.date_of_exam}}</td>
+        </tr>
+        <tr>
+          <td>Noms des accompagnants si mineur </td>
+          <td colspan="2">{{medata.names_accompagnateurs}}</td>
+        </tr>
+     </table>
+   </div>
+   <div>
+ <h6 class="bold">PROFIL DU/DES PRESUME(S) AUTEURS</h6>
+   <table>
+     <tr>
+       <td>Nombre d' agresseurs:{{medata.number_of_rapes}}</td>
+       <td>persone en ame/uniforme <mat-radio-group [(ngModel)]="medata.are_militaries"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+       <td>civil <mat-radio-group [(ngModel)]="medata.civillians"><mat-radio-button value="oui" >oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+       <td>inconnue <mat-radio-group [(ngModel)]="medata.unknown"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+    <tr>
+      <td>ages des auteurs</td>
+       <td colspan="3">{{medata.age_authors}}</td>
+    </tr>
+    <tr>
+      <td>Description Physiques</td>
+       <td colspan="3">{{medata.description_of_authors}}</td>
+    </tr>
+      <tr>
+        <td>
+          Relations avec la victime:
+        </td>
+        <td>Membre de la famille<mat-radio-group [(ngModel)]="medata.if_family_member"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+        <td>Voisin<mat-radio-group [(ngModel)]="medata.if_neighbour"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+        <td>connaissance<mat-radio-group [(ngModel)]="medata.if_connaissance"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+   </table>
+   </div>
+   <div>
+     <h6 class="bold">EVALUATION DU RISQUE</h6>
+     <table>
+      <tr>
+        <td>La victime a peur de retourne chez elle<mat-radio-group [(ngModel)]="medata.is_the_victim_afraid_to_go_home"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+      <tr>
+        <td>La victime dit être menancée<mat-radio-group [(ngModel)]="medata.is_victime_intimidate"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+     </table>
+   </div>
+   <div>
+     <h6 class="bold">L' AGRESSION</h6>
+     <table>
+      <tr>
+        <td>Date de l' agression{{medata.date_of_agression}}</td>
+        <td>Heure de l' agression{{medata.date_of_agression}}</td>
+        <td>Quantième incident de violence sexuelle vécu par la victime</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+       <h6>Description de l' agression par la victime(témoin ou accompagnants){{medata.description_of_rape}}</h6>
+       <p>Circonstances? (déplacement de population,chemin de l' école; dans les champs,à la source d' eau..) ?
+        {{medata.description_of_circonstances}}
+       </p>
+       <p>Type de violence(harcèllement,viol,tentative de viol,violence domestique,mutilation..){{medata.violence_types}}</p>
+       <p>pillages?{{medata.pillage}}</p>
+       <p>Notion contrainte(menace avec arme blance ou à feu,Physique,drogues,alcool)?{{medata.notion_contrainte}}</p>
+       <p>Autres victimes présentes{{medata.others_witnesses}},nombre des témoins?{{medata.number_of_witness}}</p></td>
+      </tr>
+     </table>
+   </div>
+   <br>
+   <div>
+       <table>
+           <tr>
+             <td>Lors de l' agression,y a-t-il eu :</td>
+             <td>Oui</td>
+             <td>Non</td>
+             <td>Pas sur</td>
+             <td>Commentaire </td>
+           </tr>
+           <tr><td class="bold">PENETRATION</td><td><span *ngIf="medata.if_penetration=='oui'">{{medata.if_penetration}}</span></td><td><span *ngIf="medata.if_penetration=='non'">{{medata.if_penetration}}</span></td><td>{{medata.penetration_not_sure}}</td><td>{{medata.penetration_comment}}</td> </tr>
+           <tr> <td>pénis</td><td><span *ngIf="medata.if_penis_penetration=='oui'">{{medata.if_penis_penetration}}</span><td><span *ngIf="medata.if_penis_penetration=='non'">{{medata.if_penis_penetration}}</span></td><td>{{medata.penis_penetration_notsure}}</td><td>{{medata.penis_penetration_comment}}</td></tr>
+          <tr><td>Doigts</td><td><span *ngIf="medata.if_finger_penetration=='oui'">{{medata.if_finger_penetration}}</span><td><span *ngIf="medata.if_finger_penetration=='non'">{{medata.if_finger_penetration}}</span></td><td>{{medata.finger_penetration_notsure}}</td><td>{{medata.finger_penetration_comment}}</td></tr>
+          <tr> <td>Autres à décrire</td><td><span *ngIf="medata.if_other_penetration=='oui'">{{medata.if_other_penetration}}</span></td><td><span *ngIf="medata.if_other_penetration=='non'">{{medata.if_other_penetration}}</span></td><td>{{medata.other_penetration_notsure}}</td><td>{{medata.other_penetration_comment}}</td></tr>
+          <tr><td>Orifices de pénétration:</td> <td><span *ngIf="medata.if_orifice_penetration=='oui'">{{medata.if_orifice_penetration}}</span></td><td><span *ngIf="medata.if_orifice_penetration=='non'">{{medata.if_orifice_penetration}}</span></td><td>{{medata.orifice_penetration_notsure}}</td><td>{{medata.orifice_penetration_comment}}</td></tr>
+          <tr> <td>Bouche</td><td><span *ngIf="medata.if_mouth_orifice=='oui'">{{medata.if_mouth_orifice}}</span></td><td><span *ngIf="medata.if_mouth_orifice=='non'">{{medata.if_mouth_orifice}}</span></td><td>{{medata.mouth_orifice_notsure}}</td><td>{{medata.mouth_orifice_comment}}</td></tr>
+         <tr><td>Vagin</td><td><span *ngIf="medata.if_vagin_orifice=='oui'">{{medata.if_vagin_orifice}}</span></td><td><span *ngIf="medata.if_vagin_orifice=='non'">{{medata.if_vagin_orifice}}</span></td><td>{{medata.if_vagin_orifice_notsure}}</td><td>{{medata.vagin_orifice_comment}}</td></tr>
+         <tr> <td>Anus</td><td><span *ngIf="medata.if_anus_orifice=='oui'">{{medata.if_anus_orifice}}</span></td><td><span *ngIf="medata.if_anus_orifice=='non'">{{medata.if_anus_orifice}}</span></td><td>{{medata.if_anus_orifice_notsure}}</td><td>{{medata.anus_orifice_comment}}</td></tr>
+         <tr> <td>Autres à décrire</td><td><span *ngIf="medata.if_other_orifice_penetration=='oui'">{{medata.if_other_orifice_penetration}}</span></td><td><span *ngIf="medata.if_other_orifice_penetration=='non'">{{medata.if_other_orifice_penetration}}</span></td><td>{{medata.if_other_orifice_penetration_notsure}}</td><td>{{medata.other_orifice_penetration_comment}}</td></tr>
+         <tr><td>EJACULATION:</td> <td><span *ngIf="medata.if_ejacul=='oui'">{{medata.if_ejacul}}</span></td><td><span *ngIf="medata.if_ejacul=='non'">{{medata.if_ejacul}}</span></td><td>{{medata.if_ejac_notsure}}</td><td>{{medata.ejaculation_comment}}</td></tr>
+          <tr> <td>Bouche</td><td><span *ngIf="medata.if_ejac_in_mouth=='oui'">{{medata.if_ejac_in_mouth}}</span></td><td><span *ngIf="medata.if_ejac_in_mouth=='non'">{{medata.if_ejac_in_mouth}}</span></td><td>{{medata.if_ejac_mouth_notsure}}</td><td>{{medata.ejac_mouth_comment}}</td> </tr>
+         <tr><td>Vagin</td><td><span *ngIf="medata.if_ejac_vagin=='oui'">{{medata.if_ejac_vagin}}</span></td><td><span *ngIf="medata.if_ejac_vagin=='non'">{{medata.if_ejac_vagin}}</span></td><td>{{medata.if_ejac_vagin_notsure}}</td><td>{{medata.ejacu_vagin_comment}}</td></tr>
+         <tr> <td>Anus</td><td><span *ngIf="medata.if_ejac_anus=='oui'">{{medata.if_ejac_anus}}</span></td><td><span *ngIf="medata.if_ejac_anus=='non'">{{medata.if_ejac_anus}}</span></td><td>{{medata.if_ejac_anus_notsure}}</td><td>{{medata.ejac_anus_comment}}</td></tr>
+         <tr> <td>Autres à décrire</td><td><span *ngIf="medata.if_other_ejac=='oui'">{{medata.if_other_ejac}}</span></td><td><span *ngIf="medata.if_other_ejac=='non'">{{medata.if_other_ejac}}</span></td><td>{{medata.if_other_ejac_notsure}}</td><td>{{medata.other_ejac_comment}}</td></tr>
+         <tr> <td>USAGE DE PRESERVATIF</td><td><span *ngIf="medata.if_used_Condom=='oui'">{{medata.if_used_Condom}}</span></td><td><span *ngIf="medata.if_used_Condom=='non'">{{medata.if_used_Condom}}</span></td><td>{{medata.used_condom_notsure}}</td><td>{{medata.condom_use_comment}}</td></tr>
+       </table>
+   </div>
+   <br>
+   <div>
+   <table>
+    <tr>
+      <td>Vomi<mat-radio-group [(ngModel)]="medata.if_vomit_sign"><mat-radio-button value="Oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      <td>Urine<mat-radio-group [(ngModel)]="medata.if_urinate_sign"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      <td>Défequé<mat-radio-group [(ngModel)]="medata.if_defeque" ><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    </tr>
+    <tr>
+      <td>Changé de vêtements ou sous vêtements <mat-radio-group [(ngModel)]="medata.if_Clothes_Changed" ><mat-radio-button value="Oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      <td>Pris un bain<mat-radio-group [(ngModel)]="medata.if_bath_taken"><mat-radio-button value="Oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      <td>Brossé les dents ou rincé la bouche<mat-radio-group [(ngModel)]="medata.if_brushed_teeth"><mat-radio-button value="Oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    </tr>
+    <tr>
+      <td colspan="3">Rapport sexuel volontaire depuis l' agression {{medata.if_sexe_volontary_in_agression}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">Date du dernier rapport sexuel volontaire{{medata.last_volontary_sex_date}}</td>
+      <td>Heure du dernier rapport sexuel volontaire{{medata.last_hour_volontary_sex}}</td>
+    </tr>
+   </table>
+   </div>
+   <br>
+   <div>
+
+    <table>
+      <tr>
+        <td>4.Lors de l' agression,y t'il eu :</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Pas sur</td>
+        <td>Commentaire </td>
+      </tr>
+      <tr><td>CONTRACEPTION</td><td><span *ngIf="medata.if_contraception=='Oui'">{{medata.if_contraception}}</span></td><td><span *ngIf="medata.if_contraception=='non'">{{medata.if_contraception}}</span></td><td>{{medata.if_contraception_notsure}}</td><td>{{medata.contraception_comment}}</td> </tr>
+      <tr> <td>pilule</td><td><span *ngIf="medata.if_contra_pillule=='oui'">{{medata.if_contra_pillule}}</span></td><td><span *ngIf="medata.if_contra_pillule=='non'">{{medata.if_contra_pillule}}</span></td><td>{{medata.contra_pillule_notsure}}</td><td>{{medata.contra_pillule_comment}}</td> </tr>
+     <tr><td>Stérilet</td><td><span *ngIf="medata.if_sterille_contra=='oui'">{{medata.if_sterille_contra}}</span></td><td><span *ngIf="medata.if_sterille_contra=='non'">{{medata.if_sterille_contra}}</span></td><td>{{medata.if_sterille_notsure_contra}}</td><td>{{medata.sterille_comment_contra}}</td></tr>
+     <tr> <td>Injection</td><td><span *ngIf="medata.if_injection_contra=='oui'">{{medata.if_injection_contra}}</span></td><td><span *ngIf="medata.if_injection_contra=='non'">{{medata.if_injection_contra}}</span></td><td>{{medata.if_injection_contra_notsure}}</td><td>{{medata.injection_contra_comment}}</td></tr>
+     <tr><td>Autres à décrire</td> <td><span *ngIf="medata.if_other_contra=='oui'">{{medata.if_other_contra}}</span></td><td><span *ngIf="medata.if_other_contra=='non'">{{medata.if_other_contra}}</span></td><td>{{medata.if_other_contra_notsure}}</td><td>{{medata.other_contra_comment}}</td></tr>
+     <tr> <td>MUTILATION</td><td><span *ngIf="medata.if_mutilation=='oui'">{{medata.if_mutilation}}</span></td><td><span *ngIf="medata.if_mutilation=='non'">{{medata.if_mutilation}}</span></td><td>{{medata.if_mutilation_notsure}}</td><td>{{medata.mutilation_comment}}</td> </tr>
+   <tr><td colspan="6">S' il y a eu mutilation {{medata.mutilation_hisory_and_type}} ,préciser l' histoire et le type de mutilation pratiqué:{{medata.mutilation_hisory_and_type}}</td></tr>
+   <tr> <td>Dates du dernières règles </td><td><span *ngIf="medata.if_last_date_of_regle=='oui'">{{medata.if_last_date_of_regle}}</span></td><td><span *ngIf="medata.if_last_date_of_regle=='non'">{{medata.if_last_date_of_regle}}</span></td><td>{{medata.if_last_date_of_regle_notsure}}</td><td>{{medata.last_date_of_regle_comment}}</td> </tr>
+   <tr> <td>règles au moment de l' agression </td><td><span *ngIf="medata.if_regle_during_agression=='oui'">{{medata.if_regle_during_agression}}</span></td><td><span *ngIf="medata.if_regle_during_agression=='non'">{{medata.if_regle_during_agression}}</span></td><td>{{medata.if_regle_during_agression_notsure}}</td><td>{{medata.regle_during_agression_comment}}</td> </tr>
+   <tr> <td>saignement pendent l' agression</td><td><span *ngIf="medata.if_bleed_during_agression=='oui'">{{medata.if_bleed_during_agression}}</span></td><td><span *ngIf="medata.if_bleed_during_agression=='non'">{{medata.if_bleed_during_agression}}</span></td><td>{{medata.if_bleed_during_agression_notsure}}</td><td>{{medata.bleed_during_agression_comment}}</td> </tr>
+   <tr>
+    <td>Parité<mat-radio-group [(ngModel)]="medata.if_parity"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    <td>Gestité<mat-radio-group [(ngModel)]="medata.if_gesity"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    <td>Avortement<mat-radio-group  [(ngModel)]="medata.if_abortion"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="non">Non</mat-radio-button></mat-radio-group></td>
+    <td colspan="2">Dèces<mat-radio-group [(ngModel)]="medata.if_dead"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+  </tr>
+ <tr>
+   <td colspan="5">Quels sont les problèmes de santé existants?{{medata.existing_health_problems}}</td>
+ </tr>
+ <tr><td colspan="5">Allergies connues?{{medata.if_allergy_known}}</td></tr>
+  </table>
+   </div>
+   <br>
+   <div>
+   <table>
+      <tr>
+        <td></td>
+        <td>Prise d' alcool</td>
+        <td>Prise des medicaments</td>
+        <td>Prise des drogues</td>
+      </tr>
+      <tr>
+        <td>Avant l' agression</td>
+        <td>{{medata.if_alcool_taken_before_agression}}</td>
+          <td>{{medata.if_medicins_taken_before_agression}}</td>
+          <td>{{medata.if_drug_take_before_agression}}</td>
+      </tr>
+      <tr>
+        <td>Après l' agression</td>
+        <td>{{medata.if_alcool_taken_after_agression}}</td>
+          <td>{{medata.if_medicins_taken_after_agression}}</td>
+          <td>{{medata.f_drug_take_after_agression}}</td>
+      </tr>
+      <tr>
+        <td>Regulièrement</td>
+        <td>{{medata.if_alcool_taken_everyday_agression}}</td>
+          <td>{{medata.if_medicins_taken_everyday_agression}}</td>
+          <td>{{medata.if_drug_take_everyday_agression}}</td>
+      </tr>
+    </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <td>STATUS VACCINAL</td>
+          <td>Vacciné</td>
+          <td>Date de vaccination </td>
+          <td>Non vacciné</td>
+          <td>Statut vaccinal inconnu</td>
+        </tr>
+        <tr>
+          <td>Tetanos</td>
+          <td>{{medata.if_tetanos_vaccin}}</td>
+          <td>{{medata.tetanos_vaccin_date}}</td>
+          <td>{{medata.if_tetanos_no_vaccinate}}</td>
+          <td>{{medata.tetanos_statusvaccinal_notknown}}</td>
+        </tr>
+        <tr>
+          <td>Hépatite B</td>
+          <td>{{medata.if_hepatit_b_vaccin}}</td>
+          <td>{{medata.hepatite_vaccin_date}}</td>
+          <td>{{medata.if_hepatite_not_vaccinated}}</td>
+          <td>{{medata.if_hepatite_statusvaccin_notknown}}</td>
+        </tr>
+        <tr>
+          <td>STATUS VIH</td>
+          <td>{{medata.if_status_vih_vaccinate}}</td>
+          <td>{{medata.status_vih_vaccinate_date}}</td>
+          <td>{{medata.if_status_vih_not_vaccinate}}</td>
+          <td>{{medata.if_status_vaccinal_inconnu}}</td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <td>Apparences de la victime : vêtements,cheveux ,visage,attitude,etc {{medata.victim_appearance}}</td>
+        </tr>
+        <tr>
+          <td>Aspect psychologiques:calme,peur,anxieté,angoisse,pleurs,etc{{medata.victim_psycho_aspects}}</td>
+        </tr>
+        <tr>
+          <td>SIGNES VITAUX</td>
+          <td>Poids {{medata.victim_weight}} k</td>
+          <td>Taille{{medata. victim_height}}</td>
+          <td>TA</td>
+        </tr>
+        <tr>
+          <td>Pouls {{medata.if_poul}}</td>
+          <td>T°{{medata.temperature}}</td>
+          <td>Fréquence respiratoire {{medata.breathin_frequency}}</td>
+          <td>Fréquence cardiaque{{medata.cardiaque_frequency}}</td>
+        </tr>
+        <tr>
+          <td>Plaies qui saignent {{medata.bleeding_wound}}</td>  <td colspan="3">où (à préciser){{medata.bleeding_wound_part}} </td>
+        </tr>
+        <tr>
+          <td>Cicatrice {{medata.if_cicatrice}}</td>  <td colspan="3">où (à préciser) {{medata.cicatrice_part}}</td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+      <table>
+             <tr>
+               <td colspan="1">Etat de la tête {{medata.state_of_head}}</td><td colspan="2">Etat du nez{{medata.state_of_nose}} </td>
+             </tr>
+             <tr>
+              <td colspan="1">Etat des yeux{{medata.eyes_state}} </td><td colspan="2">Etat de la bouche{{medata.mouth_state}} </td>
+            </tr>
+            <tr>
+              <td colspan="1">Etat des oreilles{{medata.ears_state}} </td><td colspan="2">Etat du coup{{medata.neck_state}} </td>
+            </tr>
+            <tr>
+              <td>Etat  de la poitrine{{medata.chest_state}} </td><td colspan="2">Etat de l' abdomen{{medata.abdomen_state}} </td>
+            </tr>
+            <tr>
+              <td>Etat du dos{{medata.back_state}}  </td><td colspan="2">Etat des fesses{{medata.battocks_state}} </td>
+            </tr>
+            <tr>
+              <td>Etat des membres supérieures{{medata.upper_menbers_state}}</td><td colspan="2">Etat des membres inférieures{{medata.lower_menbers_state}} </td>
+            </tr>
+            <tr>
+              <td>présence de prétechies/bleus<mat-radio-group [(ngModel)]="medata.deus_presence"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+              <td>Conjoctivité<mat-radio-group [(ngModel)]="medata.conjoctives_presence"><mat-radio-button value="oui" >oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+              <td>Derrière les oreilles<mat-radio-group [(ngModel)]="medata.presence_behind_ears"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+            </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+       <table>
+          <tr>
+            <td>Vulve/périné!Scrotum</td>
+            <td>Hymen</td>
+            <td>Anus</td>
+            <td>Vagin/pénis</td>
+          </tr>
+          <tr>
+            <td colspan="5">Position du patient lors de l' Examen Genital:{{medata.victim_postion_genital_exam}}</td>
+          </tr>
+          <tr>
+            <td>Décubitus dorsal</td>
+            <td>Décubitus ventral</td>
+            <td>Genou péctoral</td>
+            <td>Décubitus latéral</td>
+          </tr>
+          <tr>
+            <td colspan="5">Position du patient lors de l' Examen Anal:</td>
+          </tr>
+          <tr>
+            <td>Décubitus dorsal</td>
+            <td>Décubitus ventral</td>
+            <td>Genou péctoral</td>
+            <td>Décubitus latéral</td>
+          </tr>
+       </table>
+       <br>
+       <table>
+         <tr>
+           <p>Décrire systématiquement et dessiner sur les images en annexe,l' endroit exact de toutes les plaies et lésions,préciser le type,taille ,couleur,forme et autre particularité.Rester descriptif et non interprétatif
+             <span class="text-danger">{{medata.description_of_all_pains | lowercase}}</span>
+           </p>
+         </tr>
+
+       </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <td>Test/Examen réalisé</td>
+          <td>Echantillion</td>
+          <td>Resultat</td>
+        </tr>
+        <tr>
+          <td>Grossesse<span class="text-danger">{{medata.if_pregnancy_test}}</span> </td><td>Urines</td><td>{{medata.pregnacy_result}}</td>
+        </tr>
+        <tr>
+          <td>VIH  <span class="text-danger">{{medata.if_vih_test}}</span> </td><td>sang  sérum</td><td>{{medata.vih_result}}</td>
+        </tr>
+        <tr>
+          <td>RPR/VDRL <span class="text-danger">{{medata.if_rpr_vdrl_test}}</span> </td><td>sang  sérum</td><td>{{medata.rpr_vdrl_test_result}}</td>
+        </tr>
+        <tr>
+          <td>Hép B  <span class="text-danger">{{medata.if_test_hepa_b}}</span> </td><td>sang sérum</td><td>{{medata.test_hepa_b_resultat}}</td>
+        </tr>
+        <tr>
+          <td>Imagerie médical <span class="text-danger">{{medata.if_imageri_medical}}</span></td><td></td><td>{{medata.imageri_medical_result}}</td>
+        </tr>
+        <tr>
+          <td>Autres {{medata.if_other_testexam}}</td><td>Frottis</td><td>{{medata.other_testexam_result}}</td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div>
+       <table>
+        <tr>
+          <td>Types de preuves et sites</td>
+          <td>Lieu d' examen</td>
+          <td>Lieu de stockage</td>
+          <td>Prélevé par date</td>
+        </tr>
+        <tr>
+          <td>ok</td>
+          <td>ok</td>
+          <td>ok</td>
+          <td>ok</td>
+        <tr>
+          <tr>
+            <td>ok</td>
+            <td>ok</td>
+            <td>ok</td>
+            <td>ok</td>
+          <tr>
+            <tr>
+              <td>ok</td>
+              <td>ok</td>
+              <td>ok</td>
+              <td>ok</td>
+            <tr>
+              <tr>
+                <td>ok</td>
+                <td>ok</td>
+                <td>ok</td>
+                <td>ok</td>
+              <tr>
+       </table>
+    </div>
+    <br>
+    <div>
+      <table>
+          <tr>
+            <td class="bold-mini">Traitement</td>
+            <td class="bold-mini">Oui</td>
+             <td class="bold-mini">Non</td>
+             <td class="bold-mini">Remarques</td>
+          </tr>
+
+          <tr>
+             <td>Prévention</td>
+             <td><span *ngIf="medata.if_prevention=='oui'">{{medata.if_prevention}}</span></td>
+             <td><span *ngIf="medata.if_prevention=='non'">{{medata.if_prevention}}</span></td>
+             <td>{{medata.prevention_remarque}}</td>
+          </tr>
+          <tr>
+            <td>Traitement/PréventionIST</td>
+            <td><span *ngIf="medata.if_tratement_preventionist=='oui'">{{medata.if_tratement_preventionist}}</span></td>
+            <td><span *ngIf="medata.if_tratement_preventionist=='non'">{{medata.if_tratement_preventionist}}</span></td>
+            <td>{{medata.tratement_preventionist_remarques}}</td>
+         </tr>
+         <tr>
+          <td>Contraception d' urgence</td>
+          <td><span *ngIf="medata.if_contraception_emergency=='oui'">{{medata.if_contraception_emergency}}</span></td>
+          <td><span *ngIf="medata.if_contraception_emergency=='non'">{{medata.if_contraception_emergency}}</span></td>
+          <td>{{medata.contraception_emergency_remark}}</td>
+       </tr>
+       <tr>
+        <td>Traitement des blessures </td>
+        <td><span *ngIf="medata.if_injure_treatement=='oui'">{{medata.if_injure_treatement}}</span></td>
+        <td><span *ngIf="medata.if_injure_treatement=='non'">{{medata.if_injure_treatement}}</span></td>
+        
+        <td>{{medata.injure_treatement_remark}}</td>
+     </tr>
+     <tr>
+      <td>Prophylaxie contre Tétanos</td>
+      <td><span *ngIf="medata.if_prophylaxy_treatment=='oui'">{{medata.if_prophylaxy_treatment}}</span></td>
+      <td><span *ngIf="medata.if_prophylaxy_treatment=='non'">{{medata.if_prophylaxy_treatment}}</span></td>
+      <td>{{medata.prophylaxy_treatment_remark}}</td>
+   </tr>
+   <tr>
+    <td>Vaccination contre l' hépatite B</td>
+    <td><span *ngIf="medata.if_vacccination_against_hepatib=='oui'">{{medata.if_vacccination_against_hepatib}}</span></td>
+    <td><span *ngIf="medata.if_vacccination_against_hepatib=='non'">{{medata.if_vacccination_against_hepatib}}</span></td>
+    <td>{{medata.vacccination_against_hepatib_remark}}</td>
+ </tr>
+ <tr>
+  <td>Répération de(s) fistules </td>
+  <td><span *ngIf="medata.if_victim_got_fistule_and_treated=='oui'">{{medata.if_victim_got_fistule_and_treated}}</span></td>
+  <td><span *ngIf="medata.if_victim_got_fistule_and_treated=='non'">{{medata.if_victim_got_fistule_and_treated}}</span></td>
+  <td>{{medata.victim_got_fistule_and_treated_remark}}</td>
+</tr>
+<tr>
+  <td>Autres(fractures etc)</td>
+  <td><span *ngIf="medata.if_other_frature_treated=='oui'">{{medata.if_other_frature_treated}}</span></td>
+  <td><span *ngIf="medata.if_other_frature_treated=='non'">{{medata.if_other_frature_treated}}</span></td>
+  <td>{{medata.other_frature_treated_remark}}</td>
+</tr>
+      </table>
+    </div>
+    <br>
+    <div>
+       <table>
+        <tr>
+         <td colspan="4">Etat psychologique géneral {{medata.general_psycho_state}}</td>
+        </tr>
+        <tr>
+          <td colspan="4">La victime planifie de reporter son à la police ou l' a déjà fait{{medata.if_victim_plan_to_report_agression}}</td>
+         </tr>
+         <tr>
+          <td colspan="4">La victime  a un endroit sûr où rester{{medata.if_victim_has_safe_place}}</td>
+         </tr>
+         <tr>
+          <td colspan="4">La victime  a quelqu' un pour l' accompagner{{medata.if_victim_has_carring_person}}</td>
+         </tr>
+         <tr>
+          <td colspan="4">Noms du partenaire responsable:{{medata.name_of_responsible_partner}}</td>
+         </tr>
+         <tr>
+          <td colspan="4">Conseils données:{{medata.advises_given}}</td>
+         </tr>
+         <tr>
+          <td>Types de références:{{medata.reference_type}}</td>
+          <td>Volet/structure de référence:{{medata.reference_structure}}</td>
+          <td>Date de  référence:{{medata.reference_date}}</td>
+          <td>Commentaires{{medata.structure_comment}}</td>
+         </tr>
+       </table>
+    </div>
+    <br>
+    <div>
+      <table>
+        <tr>
+          <td>Nom de la structure:{{medata.structure_name}}</td>
+          <td>Contact:{{medata.structure_phone_number}}</td>
+          <td>Adresse physique:{{medata.structure_physical_adress}}</td>
+          <td>Zone de santé de:{{medata.zone}}</td>
+        </tr>
+        <tr>
+         <p>Nom du clinicien pratiquant l' examen médical:{{medata.nom_clinicien}}<br>
+        Fonction du clinicien{{medata.clinicien_fuction}}<br>
+       Date{{medata.date}}
+       signature
+      </p>
+        </tr>
+      </table>
+
+    </div>
+    <!--images-->
+    <br>
+ <div>
+    <table>
+      <tr>
+        <td colspan="3">Dates:</td>
+      </tr>
+      <tr>
+        <td></td> <td colspan="2"  class="bold-mini text-center" >Dans les 72h après le viol</td><td colspan="2"  class="bold-mini text-center">1 mois après le viol</td>
+       </tr>
+       <tr>
+        <td class="bold-mini">EXAMENS</td>
+        <td>test positif</td>
+        <td>test négatif</td>
+         <td>test positif</td>
+         <td>test négatif</td>
+      </tr>
+       <tr>
+        <td>Grossesse</td>
+          <td><mat-radio-group [(ngModel)]="medata.if_pregnancy_test_positifafter_sevenytwohours"><mat-radio-button value="Oui" >oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+        <td><mat-radio-group [(ngModel)]="medata.if_pregnancy_test_negatiffafter_sevenytwohours"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+        <td><mat-radio-group [(ngModel)]="medata.if_pregnancy_test_negatiffafter_onemoth"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+        <td><mat-radio-group [(ngModel)]="medata.if_pregnancy_test_positiffafter_onemoth"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+      <tr>
+        <td>VIH</td>
+          <td><mat-radio-group [(ngModel)]="medata.if_vih_test_positi_after_inseventytwo_hours"><mat-radio-button value="oui" >oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_vih_test_negatif_after_inseventytwo_hours"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_vih_test_positiffafter_onemoth"><mat-radio-button value="oui">oui</mat-radio-button ><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_vih_test_negatiffafter_onemoth"><mat-radio-button value="oui">oui</mat-radio-button ><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr>
+      <tr>
+        <td>IST</td>
+          <td><mat-radio-group [(ngModel)]="medata.if_ist_test_positif_after_inseventytwo_hours"><mat-radio-button value="oui" >oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_ist_test_negatif_after_inseventytwo_hours"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_ist_test_positif_after_onemoth"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+          <td><mat-radio-group [(ngModel)]="medata.if_ist_test_negatif_after_onemoth"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+      </tr> 
+    </table>
+ </div>
+ <br>
+ <div>
+<table>
+  <tr>
+    <td>PRISE EN CHARGE</td>
+    <td>Oui</td>
+    <td>Non</td>
+    <td>Commentaires</td>
+  </tr>
+  <tr>
+    <td>
+      si la victime était séronegative,avait-elle reçu le PEP Kit dans 72heures après le viol ? si non pourquoi?
+    </td>
+    <td><span *ngIf="medata.if_victim_sero_negative_got_Pep_after_rape_or_why_not=='oui'">{{medata.if_victim_sero_negative_got_Pep_after_rape_or_why_not}}</span></td>
+    <td><span *ngIf="medata.if_victim_sero_negative_got_Pep_after_rape_or_why_not=='non'">{{medata.if_victim_sero_negative_got_Pep_after_rape_or_why_not}}</span></td>
+    <td>{{medata.comment_victim_got_pep_become_sero_positive_after_one_month}}</td>
+  </tr>
+  <tr>
+    <td>
+      si la victime avait reçu le PEP Kit, est ce que elle est dévenu séropositive après un mois?
+    </td>
+    <td><span *ngIf="medata.if_victim_got_pep_become_sero_positive_after_one_month=='oui'">{{medata.if_victim_got_pep_become_sero_positive_after_one_month}}</span></td>
+    <td><span *ngIf="medata.if_victim_got_pep_become_sero_positive_after_one_month=='non'">{{medata.if_victim_got_pep_become_sero_positive_after_one_month}}</span></td>
+    <td>{{medata.victim_got_pep_become_sero_positive_after_one_month_comment}}</td>
+  </tr>
+  <tr>
+    <td>
+      la victime a reçu le Traitement contre les IST autre que le VIH/SIDA et le test de labo est resté toujours positif?
+    </td>
+    <td><span *ngIf="medata.if_victim_got_istVih_treatement=='oui'">{{medata.if_victim_got_istVih_treatement}}</span></td>
+    <td><span *ngIf="medata.if_victim_got_istVih_treatement=='non'">{{medata.if_victim_got_istVih_treatement}}</span></td>
+    <td>{{medata.victim_got_istVih_treatement_comment}}</td>
+  </tr>
+  <tr>
+    <td>
+      Si la victime était enceinte au moment du viol ,a-t-elle fait une fausse couche
+    </td>
+    <td><span *ngIf="medata.if_victim_pregnant_during_rape=='oui'">{{medata.if_victim_pregnant_during_rape}}</span></td>
+    <td><span *ngIf="medata.if_victim_pregnant_during_rape=='non'">{{medata.if_victim_pregnant_during_rape}}</span></td>
+    <td>{{medata.victim_pregnant_during_rape_comment}}</td>
+  </tr>
+  <tr>
+    <td>
+      Si la victime a eu une fistule du viol ,a-t-elle été réparée?
+    </td>
+    <td><span *ngIf="medata.if_victim_got_fistule_and_treated=='oui'">{{medata.if_victim_got_fistule_and_treated}}</span></td>
+    <td><span *ngIf="medata.if_victim_got_fistule_and_treated=='non'">{{medata.if_victim_got_fistule_and_treated}}</span></td>
+    <td>{{medata.victim_got_fistule_and_treated_remark}}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Observations:{{medata.observation_comment}}</td>
+    <td colspan="2">Date de la visite:{{medata.visit_date}}<br>
+     partenaire responsable:{{medata.responsible_partner}}</td>
+  </tr>
+</table>
+ </div>
+ <br>
+ <div>
+   <i>2 eme VISITE</i>
+   <table>
+    <tr>
+      <td>PRISE EN CHARGE</td>
+      <td>Oui</td>
+      <td>Non</td>
+      <td>Commentaires</td>
+    </tr>
+    <tr>
+      <td>
+        si la victime était séronegative,avait-elle reçu le PEP Kit dans 72heures après le viol ? si non pourquoi?
+      </td>
+      <td><span *ngIf="medata.If_VicWasSeronegaGotPepINSeventyTwoSp=='oui'">{{medata.If_VicWasSeronegaGotPepINSeventyTwoSp}}</span></td>
+      <td><span *ngIf="medata.If_VicWasSeronegaGotPepINSeventyTwoSp=='non'">{{medataIf_VicWasSeronegaGotPepINSeventyTwoSp}}</span></td>
+      <td>{{medata.CommentVicWasSeronegaGotPepINSp}}</td>
+    </tr>
+    <tr>
+      <td>
+        si la victime avait reçu le PEP Kit, est ce que elle est dévenu séropositive après 3 mois?
+      </td>
+      <td><span *ngIf="medata.If_VicGotPepBecomeSeropoAfterTreeMonthSp=='oui'">{{medata.If_VicGotPepBecomeSeropoAfterTreeMonthSp}}</span></td>
+      <td><span *ngIf="medata.If_VicGotPepBecomeSeropoAfterTreeMonthSp=='non'">{{medata.If_VicGotPepBecomeSeropoAfterTreeMonthSp}}</span></td>
+      <td>{{medata.CommentVicGotPepBecomeSeropoAfterTreeMonthSp}}</td>
+    </tr>
+    <tr>
+      <td>
+        la victime a reçu le Traitement contre les IST autre que le VIH/SIDA et le test de labo est resté toujours positif?
+      </td>
+      <td><span *ngIf="medata.If_VicGotTreatAgainsIstTesLaboPosiSp=='oui'">{{medata.If_VicGotTreatAgainsIstTesLaboPosiSp}}</span></td>
+      <td><span *ngIf="medata.If_VicGotTreatAgainsIstTesLaboPosiSp=='non'">{{medata.If_VicGotTreatAgainsIstTesLaboPosiSp}}</span></td>
+      <td>{{medata.CommentVicGotTreatAgainsIstTesLaboPosiSp}}</td>
+    </tr>
+    <tr>
+      <td>
+        Si la victime était enceinte au moment du viol ,a-t-elle fait une fausse couche
+      </td>
+      <td><span *ngIf="medata.If_VicWasPregnantINviolFakeCoucheSp=='oui'">{{medata.If_VicWasPregnantINviolFakeCoucheSp}}</span></td>
+      <td><span *ngIf="medata.If_VicWasPregnantINviolFakeCoucheSp=='non'">{{medata.If_VicWasPregnantINviolFakeCoucheSp}}</span></td>
+      <td>{{medata.CommentVicWasPregnantINviolFakeCoucheSp}}</td>
+    </tr>
+    <tr>
+      <td>
+        Si la victime a eu une fistule du viol ,a-t-elle été réparée?
+      </td>
+      <td><span *ngIf="medata.If_VicGotFistuleWasReparedSp=='oui'">{{medata.If_VicGotFistuleWasReparedSp}}</span></td>
+      <td><span *ngIf="medata.If_VicGotFistuleWasReparedSp=='non'">{{medata.If_VicGotFistuleWasReparedSp}}</span></td>
+      <td>{{medata.CommentVicGotFistuleWasReparedSp}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">Observations:{{medata.ObservationsSp}}</td>
+      <td colspan="2">Date de la visite:{{medata.DateVisiTeSp}}<br>
+       partenaire responsable:{{medata.PartenaireRespoSp}}</td>
+    </tr>
+  </table>
+ </div>
+ <br>
+ <div>
+   <h6 class="text-center bold">REFERENCE MEDICAL</h6>
+   <table>
+     <tr>
+       <td>Assistance medical réçu? {{medata.GotAssMedical}}</td>
+       <td>Date(jj/mm/aaa) {{medata.Date}}</td>
+     </tr>
+     <tr>
+      <td colspan="2">Types d' Assistance reçue:{{medata.TypeAssystanceGot}}</td>
+     </tr>
+     <tr>
+      <td class="bold-mini">EXAMENS</td>
+      <td class="bold-mini">Traitement</td>
+    </tr>
+    <tr>
+      <td>TEST Grossesse {{medata.ExamenTestGrossesse}}</td>
+      <td>Contraception d' urgence{{medata.TrContracepUrgence}}</td>
+    </tr>
+    <tr>
+      <td>TEST VIH{{medata.ExamenTestVih}}</td>
+      <td>prévention VIH(kit PEP){{medata.TrPreventionVih}}</td>
+    </tr>
+    <tr>
+      <td>TEST contre les IST {{medata.ExamenTestIst}}</td>
+      <td>Traitemen contre les IST{{medata.TrIst}}</td>
+    </tr>
+    <tr>
+      <td>Examens Physique{{medata.ExamenPhysique}}</td>
+      <td rowspan="2">Autres à préciser: {{medata.TrOtherPricise}}</td>
+    </tr>
+    <tr>
+      <td>Examen de laboratoire{{medata.ExamenLabo}}</td>
+    </tr>
+    <tr>
+      <p>Examen medicaux effectués immédiatement après l' agression?{{medata.If_ExamenMedicauxAfterAgression}}</p>
+      <p>Description ou copie disponible du rapport (certificat) médicalcivil? 
+        <mat-radio-group [(ngModel)]="medata.ExamenMediAfterAgressionDescript"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="non">Non</mat-radio-button></mat-radio-group></p>
+      <p>si non ,pourquoi ,expliquez les raisons?{{medata.ExamenMediAfterAgressionReasonsIfnon}}</p>
+    </tr>
+    <tr>
+     <td>Grossesse avant viol <mat-radio-group [(ngModel)]="medata.If_GrossesseBeforeViol"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+     <td>Conception à la suite du viol§<mat-radio-group [(ngModel)]="medata.If_ConceptionSviol"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    </tr>
+    <tr>
+      <td colspan="2">Enfant ou foetus toujours vivant et en bonne santé<mat-radio-group [(ngModel)]="medata.IF_EnfantOrFoetusalive"><mat-radio-button value="oui">oui</mat-radio-button><mat-radio-button value="Non">Non</mat-radio-button></mat-radio-group></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+     Sequelles ou lésions physiques{{medata.SequellOrLesionPhysique}}
+      </td>
+    </tr>
+    <tr>
+<td>Nom de la structure{{medata.NomStructure}}</td>
+<td>Qualité  de la structure
+   <input type="radio" value="ps" [(ngModel)]="medata.QualiteStrucutre" disabled/>PS
+  <input type="radio" value="CS"  [(ngModel)]="medata.QualiteStrucutre"/>CS
+  <input type="radio" value="CSR" [(ngModel)]="medata.QualiteStrucutre"/>CSR
+  <input type="radio" value="HGR"  [(ngModel)]="medata.QualiteStrucutre"/>HGR
+
+  </td>
+    </tr>
+    <tr>
+      <p>Nom du clinicien:{{medata.NomClinicien}}<br>
+     Fonction du clinicien:{{medata.FonctionClinicien}}<br>
+    Date:{{medata.DateClini}}
+    signature:{{medata.SignatureClini}}
+   </p>
+  </tr>
+   </table>
+ </div>
+ <div>
+   <h6 class="text-center bold">CERTIFICAT MEDICAL</h6>
+   <p>Nous soussigné(e)<br>
+    Fonction: <br></p>
+    <p>Certifions avoir examiné ce jour............................(heure ,jour ,mois ,année)
+      <br>
+      A la demande de ...........................(père/mère/répresentant légal ;si enfant)<br>
+      Né(e) le ..........................(jour/mois/année)<br>
+      Age................................ans,<span>(au cas où la date de naissance n' est pas connue  )</span>
+      <br>
+      Sexe:<input type="radio" value="m" [(ngModel)]="medata.victime_sexe"/>Masculin
+      <input type="radio" value="f"  [(ngModel)]="medata.victime_sexe"/>Feminin
+      Adresse:......................................
+      <br>
+      il(elle) déclare
+      avoir été victime d' une agression sexuelle (si adulte ) le ..............(heure,jour,mois ,année)
+      <br>
+      A l' entretien , l' enfant ou la personne accompagnants m' a déclaré que ....................................
+      <br>
+
+    </p>
+    <div>
+      il(elle) présente les signes suivants
+      <ul>
+        <li>A l' examen général (comportement ,postraction,exitation,calme,frayeur,mutisme,pleurs,autres)</li>
+        <li>A l' examen physique  géneral:</li>
+        <li>A l' examen  géneral:</li>
+        <li>Examen paradinique pratiqués:</li>
+        <li>Evaluer les risques des grossess :</li>
+        <li>Pronostique:</li>
+        <li>Conduire à Tenir(CAT):</li>
+        <li>conclusion:</li>
+      </ul>
+      <p>certificat fait ce jour et remis en mains propres à l' à l' interressé(e) (parents ou tuteur),pour valoir ce que de droit </p>
+     <div>
+
+      les cliniciens:
+      1.Noms et signature 2 noms et signature 3. noms et signatures
+
+
+      <table>
+       <tr>
+         <td>
+          Nom de la structure
+         </td>
+
+         <td>
+          Adresse physique
+         </td>
+         <td>
+          Numero Tel:
+         </td>
+         <td>
+          Email:
+         </td>
+       </tr>
+      </table>
+
+     </div>
+     <p>Nb: l' absence de lésions ne permet pas de conclure l' absence de l' agression sexuelle .de plus ,toute lésion constatée doit être signalée</p>
+    </div>
+  </div>
+</div>
+</div>
+<input type="radio" value="Oui" [(ngModel)]="medata.back_state"/>m
+<input type="radio" value="non"  [(ngModel)]="medata.back_state"/>f
+<input type="radio" value="oui" [(ngModel)]="medata.are_militaries"/>m
+<input type="radio" value="non"  [(ngModel)]="medata.are_militaries"/>f
+</div>
+<button [useExistingCss]="true" printSectionId="print-section" ngxPrint>print</button>
+<button (click)="downloadpdf()">jspdf</button>
+
+
+

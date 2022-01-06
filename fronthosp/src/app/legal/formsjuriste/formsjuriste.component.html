@@ -1,0 +1,289 @@
+<p>formsjuriste works!</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="75vw" fxFlex.lt-sm="100%" fxLayout="column">
+    <mat-horizontal-stepper labelPosition="bottom" linear>
+      <mat-step label="Informations Medicales" [stepControl]="legalForm" [formGroup]="legalForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Accompagnement Juridique</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. Le(La) survivant(e) a-t-il/elle recu des conseils juridique?
+              </h1>
+              <mat-radio-group formControlName="has_received_advise" required>
+                <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                  fxLayoutAlign.lt-sm="space-between center">
+                  <mat-radio-button color="primary" value="True">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="False">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div>
+              <div class="question_container">
+                <h1 class="mat-title">Si oui par qui?
+                </h1>
+                <mat-radio-group formControlName="if_received_advise_who" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Juriste">
+                      Juriste
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="OPJ">
+                      OPJ
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Para-juriste">
+                      Para-juriste
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">Si non pour quelles raisons?
+                </h1>
+                <mat-radio-group formControlName="why_not_received_advsise" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Abscence personelle qualifie">
+                      Abscence personelle qualifie
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="OPJ">
+                      Saisine d'office par la justice
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">La victime accepte t'elle de porter plainte?
+                </h1>
+                <mat-radio-group formControlName="victim_agree_deposit" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="True">
+                      Oui
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="False">
+                      Non
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">Sinon pour quelles raisons?
+                </h1>
+                <mat-radio-group formControlName="why_do_not_agree_deposit" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Distance a parcourir">
+                      Distance a parcourir
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Manque de moyens financiers">
+                      Manque de moyens financiers
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Manque de confiance aux instances judiciare">
+                      Manque de confiance aux instances judiciare
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Recours aux instances traditionels/familiales">
+                      Recours aux instances traditionels/familiales
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Intimidation">
+                      Intimidation
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Honte">
+                      Honte
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+
+                  </div>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="legalForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step label="Prise en charge" [stepControl]="decisionForm" [formGroup]="decisionForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Decision</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. Decision de la juridiction d'appel?
+              </h1>
+              <mat-radio-group required formControlName="juridiction_decision">
+                <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                  fxLayoutAlign.lt-sm="space-between center">
+                  <mat-radio-button color="primary" value="Confirmation du premier jugement">
+                    Confirmation du premier jugement
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Renforcement de la decision du premier juge">
+                    Renforcement de la decision du premier juge
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Infirmation du premier jugement">
+                    Infirmation du premier jugement
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Autre">
+                    Autre
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">2.La victime a-t-elle renonce aux poursuites judiciaires en cours de processus?
+              </h1>
+              <mat-radio-group required formControlName="has_abandoned_pursuitt">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.gt-sm="space-around center">
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="False">
+                      Non
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="True">
+                      Oui
+                    </mat-radio-button>
+
+                  </div>
+
+
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">3. Si oui quelles raisons?
+              </h1>
+              <mat-radio-group required formControlName="why_abandoned">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="True">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="False">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+
+            <div>
+            </div>
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="decisionForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+
+
+
+      <mat-step label="Reference" [stepControl]="referenceForm" [formGroup]="referenceForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Reference</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. Reference
+              </h1>
+              <mat-radio-group required formControlName="reference">
+                <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around center">
+                  <div fxLayout="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Prise en charge medicale">
+                      Prise en charge medicale
+                    </mat-radio-button>
+
+
+                  </div>
+                  <div fxLayout="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-between center">
+
+
+                    <mat-radio-button color="primary" value="Reinsertion socio-economique">
+                      Reinsertion socio-economique
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Reinsertion scolaire">
+                      Reinsertion scolaire
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Accompagnement psychosocial">
+                      Accompagnement psychosocial
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Fin de l'intervention">
+                      Fin de l'intervention
+                    </mat-radio-button>
+                  </div>
+                </div>
+              </mat-radio-group>
+            </div>
+
+
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder=" autres information..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="referenceForm.invalid"
+              (click)="submit()">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

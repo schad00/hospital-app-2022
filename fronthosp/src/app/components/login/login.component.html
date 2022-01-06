@@ -1,0 +1,46 @@
+<p class="text-center">login works!</p>
+<div class="login_page" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex.gt-xs="600px" fxFlex.xs="100vw">
+    <mat-card>
+      <mat-card-title class="text-center">Se connecter</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column">
+          <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <div fxLayout="column">
+              <mat-form-field appearance="outline">
+                <mat-label>
+                  Non d'utilsateur
+                </mat-label>
+                <input type="text" required placeholder="ex : olv3rk@gmail.com" formControlName="nom"
+                  matNativeControl>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>
+                  Mot de passe
+                </mat-label>
+                <input minLength="8" matNativeControl type="password" formControlName="password" required>
+                <mat-error>enter at least 8 characters</mat-error>
+              </mat-form-field>
+              <div fxLayout="column">
+                <button  [disabled]="loginForm.invalid || loading" color="primary" mat-raised-button
+                  type="submit">
+                  Se connecter
+                </button>
+               <div fxLayout="row" fxLayoutAlign="center center"> </div>
+                              </div>
+            </div>
+          </form>
+          <div>
+            <span>Pas de compte? <a mat-button color="primary" [routerLink]="['/comptes/creer-nouveau']">Creer nouveau compte</a>
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div id="printsection">
+
+</div>
+

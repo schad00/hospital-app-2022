@@ -1,0 +1,594 @@
+<p>formsmedecin works!</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="75vw" fxFlex.lt-sm="100%" fxLayout="column">
+    <mat-horizontal-stepper labelPosition="bottom" linear>
+      <mat-step label="Informations Medicales" [stepControl]="initialForm" [formGroup]="initialForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Informations medicales</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. S'agit t'il d'un cas de viol?
+              </h1>
+              <mat-radio-group formControlName="if_rape" required>
+                <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                  fxLayoutAlign.lt-sm="space-between center">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div>
+              <div class="question_container">
+                <h1 class="mat-title">2. Si cas de viol, la survivante est elle arrive avant 72 heures?
+                </h1>
+                <mat-radio-group formControlName="arrival_time" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="oui">
+                      Oui
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="non">
+                      Non
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">3. Si oui, quette type de KIT a t elle recu
+                </h1>
+                <mat-radio-group formControlName="kind_of_kit" required>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="kit PEP complet">
+                      kit PEP complet
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="kit PEP incomplet">
+                      kit PEP incomplet
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Vacin contre hepatite B">
+                      Vacin contre hepatite B
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">4. Si elle n'a pas recu de KIT, pour quelles raisons?
+                </h1>
+                <mat-radio-group required formControlName="why_not_kit">
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Indisponibilite">
+                      Indisponibilite
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Refus par la survivante">
+                      Refus par la survivante
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Refus du prestataire">
+                      Refus du prestataire
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Refus de la famiile">
+                      Refus de la famiile
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">5. Presente t'elle des lesions severes?
+                </h1>
+                <mat-radio-group required formControlName='if_lesions'>
+                  <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                    fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="oui">
+                      Oui
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="non">
+                      Non
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="initialForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step label="Prise en charge" [stepControl]="evaluationForm" [formGroup]="evaluationForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Prise en charge</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. Y'a t'il eu prise en charge medicale?
+              </h1>
+              <mat-radio-group required formControlName="medical_evaluation">
+                <div class="choices_container" fxLayout="column" fxLayout.lt-sm="column"
+                  fxLayoutAlign.lt-sm="space-between center">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">2. Si oui quelles sont les elements de cette prise en charge?
+              </h1>
+              <mat-radio-group required formControlName="kind_of_evaluation">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.gt-sm="space-around center">
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="Accueil">
+                      Accueil
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Examen physique">
+                      Examen physique
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Prevention VIH/SIDA">
+                      Prevention VIH/SIDA
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Interogatoire / Recit des faits">
+                      Interogatoire / Recit des faits
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Traitement des IST">
+                      Traitement des IST
+                    </mat-radio-button>
+                  </div>
+                  <div class="choices_container" fxLayout="column">
+
+                    <mat-radio-button color="primary" value="Traitement des blessures">
+                      Traitement des blessures
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Prohilaxie contre la tetanos">
+                      Prohilaxie contre la tetanos
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Reparations des fistules">
+                      Reparations des fistules
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Prevention grosesse">
+                      Prevention grosesse
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Prevention des IST">
+                      Prevention des IST
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autres traitements">
+                      Autres traitements
+                    </mat-radio-button>
+                  </div>
+
+                </div>
+
+
+
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">3. Si non, pour quelles raisons?
+              </h1>
+              <mat-radio-group required formControlName="why_not_evaluated">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="Manque d'intrants">
+                    Manque d'intrants
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Refus de la survivante">
+                    Refus de la survivante
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Refus du prestataire">
+                    Refus du prestataire
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Autre">
+                    Autre
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+
+            <div>
+              <div class="question_container">
+                <h1 class="mat-title">4. Quelle pestataire a administre les soins a la survivante?
+                </h1>
+                <mat-radio-group required formControlName="evaluator_type">
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="Infirmier">
+                      Infirmier
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Medecin">
+                      Medecin
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Autre">
+                      Autre
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">5. S'agit t'il de quelle type de violence?
+                </h1>
+                <mat-radio-group required formControlName="type_of_rape">
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="Agressions sexuelle">
+                      Agressions sexuelle
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Mutilation genitales feminines / excisions">
+                      Mutilation genitales feminines / excisions
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Agression physique">
+                      Agression physique
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Mariage force">
+                      Mariage forcce
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Autres GBV">
+                      Autres GBV
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">6. A t'elle beneficie d'un conseil de depistage VIH volontaire?
+                </h1>
+                <mat-radio-group required formControlName="vih_advise">
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="oui">
+                      Oui
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="non">
+                      Non
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="question_container">
+                <h1 class="mat-title">7. Autres informations necessaires non mentiones ci-haut
+                </h1>
+                <mat-radio-group required formControlName="other_informations" >
+                  <div class="choices_container" fxLayout="column">
+                    <mat-radio-button color="primary" value="oui">
+                      Oui
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="non">
+                      Non
+                    </mat-radio-button>
+                  </div>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="evaluationForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step label="Types d'examens et resultats" [stepControl]="examinationForm" [formGroup]="examinationForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Types d'examens et resultats</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. La survivante a t elle recu n test de grossese?
+              </h1>
+              <mat-radio-group required formControlName="pregnant_test">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">2. La survivante a t elle recu test de vih?
+              </h1>
+              <mat-radio-group required formControlName="vih_test">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">3. La survivante a t elle recu le test des IST?
+              </h1>
+              <mat-radio-group required formControlName="ist_test">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">4. est elle tombe enceinte suite au viol
+              </h1>
+              <mat-radio-group required formControlName="is_pregnant">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">5. Le partenaire de survivante a t'il recu un traitement contre les IST?
+              </h1>
+              <mat-radio-group required formControlName="partner_ist_treatment">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">6. Si non pourqoui?
+              </h1>
+              <mat-radio-group required formControlName="why_not_partner_tested">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="Il n'est pas informe"  >
+                    Il n'est pas informe
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Il a refuse">
+                    Il a refuse
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Peur de lui dire">
+                    Peur de lui dire
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Autre">
+                    Autre
+                  </mat-radio-button>
+
+                </div>
+              </mat-radio-group>
+            </div>
+
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="examinationForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step label="Suivie" [stepControl]="suiviForm" [formGroup]="suiviForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Suivie</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. La survivante a t elle eu un dendez vous de suivie?
+              </h1>
+              <mat-radio-group required formControlName="rendez_vous">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">2. Si non pourquoi?
+              </h1>
+              <mat-radio-group required formControlName="why_not_rendez_vous">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="Service deja recu">
+                    Service deja recu
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Service non applicable">
+                    Service non applicable
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Service refuse par la survivante">
+                    Service refuse par la survivante
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Service non disponible">
+                    Service non disponible
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="Autre">
+                    Autre
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">3. La survivante s'est elle presente a cette visite?
+              </h1>
+              <mat-radio-group required formControlName="present_at_rendez_vous">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="question_container">
+              <h1 class="mat-title">4.Si non la survivante a t'elle abandonne le traitement?
+              </h1>
+              <mat-radio-group required formControlName="has_abandoned_drugs">
+                <div class="choices_container" fxLayout="column">
+                  <mat-radio-button color="primary" value="oui">
+                    Oui
+                  </mat-radio-button>
+                  <mat-radio-button color="primary" value="non">
+                    Non
+                  </mat-radio-button>
+                </div>
+              </mat-radio-group>
+            </div>
+
+
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder="Describe your job here. Who you are, what you need..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="suiviForm.invalid">
+              Suivant
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+
+      <mat-step label="Reference" [stepControl]="referenceForm" [formGroup]="referenceForm">
+        <div fxLayout="column" fxLayoutGap="5vh">
+          <div fxLayout="row">
+            <div fxFlex="1 1 auto"> </div>
+            <div>
+              <h1 class="mat-title">Reference</h1>
+            </div>
+            <div fxFlex="1 1 auto">
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div class="question_container">
+              <h1 class="mat-title">1. Reference
+              </h1>
+              <mat-radio-group required formControlName="reference">
+                <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around center">
+                  <div fxLayout="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-between center">
+                    <mat-radio-button color="primary" value="Prise en charge medicale">
+                      Prise en charge medicale
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Accompagnement psychosocial">
+                      Accompagnement psychosocial
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Assistance judiciare">
+                      Assistance judiciare
+                    </mat-radio-button>
+
+
+                  </div>
+                  <div fxLayout="column" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-between center">
+
+
+                    <mat-radio-button color="primary" value="Reinsertion socio-economique">
+                      Reinsertion socio-economique
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Reinsertion scolaire">
+                      Reinsertion scolaire
+                    </mat-radio-button>
+
+                    <mat-radio-button color="primary" value="Fin de l'intervention">
+                      Fin de l'intervention
+                    </mat-radio-button>
+                  </div>
+                </div>
+              </mat-radio-group>
+            </div>
+
+
+
+            <!--
+            <div>
+              <quill-editor style="min-height:30vh;" matNativeControl (onContentChanged)="contentChanged($event)"
+                required [format]="'text'" formControlName="description"
+                placeholder=" autres information..."></quill-editor>
+            </div>-->
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button type="button" mat-raised-button matStepperNext color="primary" [disabled]="referenceForm.invalid" (click)="submit()">
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
